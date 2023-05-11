@@ -1,0 +1,67 @@
+BoxLayoutExample:    # referenced to the calss 'BoxLayoutExample' => Main Interface
+
+<BoxLayoutExample>:
+    orientation: 'horizontal'
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+        size_hint_x: 0.5
+        padding: 20
+
+        Label:
+            text: 'City'
+
+        TextInput:
+            id: city
+            hint_text: "Wangen"
+            text: "Wangen"
+
+        Label:
+            text: 'State (token)'
+
+        TextInput:
+            id: state
+            hint_text: "BW"
+            text: "BW"
+
+        Label:
+            text: 'Country'
+
+        TextInput:
+            id: country
+            hint_text: "Germany"
+            text: "Germany"
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+        size_hint_x: 0.5
+        padding: 20
+
+        Button:
+            text: "Search"
+            size_hint_y: 0.5
+            on_press: root.on_button_click(self, city.text, state.text, country.text)
+
+        AsyncImage:
+            source: "https://openweathermap.org/img/wn/{}@2x.png".format(root.my_image) # "https://openweathermap.org/img/wn/10d@2x.png" # https://openweathermap.org/img/wn/{{data.icon}}@2x.png
+
+        Label:
+            text: "Main:    " + root.my_clouds
+        Label:
+            text: "Clouds:    " + root.my_description
+        Label:
+            text: "Temperature:    " + root.my_temperature + " °C"
+        Label:
+            text: "Humidity:    " + root.my_humidity + " %"
+        Label:
+            text: "Wind:    " + root.my_wind + " km/h"
+        Label:
+            text: "Rain:    " + root.my_rain + " %"
+
+        Button:
+            text: "Application Quit"
+            size_hint_y: 0.5
+            on_press: app.stop()
+
