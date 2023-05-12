@@ -96,8 +96,7 @@ class BoxLayoutExample(BoxLayout):
                 widget.text = "Search"
         else:
             print()
-            widget.text = "ERROR: Missing inputs"
-       
+            widget.text = "ERROR: Missing inputs"   
 
 
 # with '@dataclass' you dont need '__init__' and '__repr__' and '__eq__' method
