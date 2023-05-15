@@ -107,6 +107,13 @@ class BoxLayoutExample(BoxLayout):
             label.color = get_color_from_hex('#FF0000')
             self.my_appStatus = str("ERROR: Missing inputs")
 
+    def auto_geolocation(self):
+        print("[method: auto_geolocation(self)] - button pressed")
+        label = self.ids.appStatusLabel
+        label.color = get_color_from_hex('#AA00FF')
+        self.my_appStatus = str("ToDo: No functionality - Implement geolocation")
+        pass
+
 
 # with '@dataclass' you dont need '__init__' and '__repr__' and '__eq__' method
 @dataclass

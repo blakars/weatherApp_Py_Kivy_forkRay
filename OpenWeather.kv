@@ -62,12 +62,18 @@ BoxLayoutExample:    # referenced to the calss 'BoxLayoutExample' => Main Interf
             BoxLayout:
                 orientation: 'vertical'
                 size_hint_y: 0.5
-                size_hint_x: 0.8
+                #size_hint_x: 0.8
                 pos_hint: {'center_x': 0.5,'center_y': 0.5}
 
-                Button:
-                    text: "Search"
-                    on_press: root.on_button_click(self, city.text, state.text, country.text)
+                BoxLayout:
+                    orientation: 'horizontal'
+                    Button:
+                        text: "Search"
+                        on_press: root.on_button_click(self, city.text, state.text, country.text)
+                    
+                    Button:
+                        text: "Autolocate"    # NOCH OHNE FUNKTION - GEOLOCATION
+                        on_press: root.auto_geolocation()
 
                 Button:
                     text: "Application Quit"
