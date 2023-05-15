@@ -7,6 +7,8 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.image import AsyncImage
 from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import StringProperty
+from kivy.uix.label import Label
+from kivy.utils import get_color_from_hex
 
 
 # pull data from file .env
@@ -73,6 +75,7 @@ class BoxLayoutExample(BoxLayout):
     my_humidity = StringProperty("Humidity")
     my_wind = StringProperty("Wind")
     my_rain = StringProperty("Rain")
+    my_appStatus = StringProperty("active")
 
     def on_button_click(self, widget, city, state, country):
         print("[method: on_button_click(self)] - button pressed")
@@ -81,7 +84,9 @@ class BoxLayoutExample(BoxLayout):
             lat, lon = get_lan_lon(city, state, country, api_key)
             if lat is None or lon is None:
                 print("[method: on_button_click] - get_lan_lon() retrun error")
-                widget.text = "ERROR: Location unknown"
+                label = self.ids.appStatusLabel
+                label.color = get_color_from_hex('#FF0000')
+                self.my_appStatus = str("ERROR: Location unknown")
             else:
                 weather_data = get_current_weather(lat, lon, api_key)
                 print(f"Main: {weather_data.main} | Description: {weather_data.decscription} | Temperature: {weather_data.temperature} | Icon: {weather_data.icon}")
@@ -89,15 +94,18 @@ class BoxLayoutExample(BoxLayout):
                 self.my_image = weather_data.icon
                 self.my_clouds = weather_data.main
                 self.my_description = weather_data.decscription
-                self.my_temperature = str(weather_data.temperature)
+                self.my_temperature = str(round(weather_data.temperature, 2))
                 self.my_humidity = str(weather_data.humidity)
-                self.my_wind = str(weather_data.wind*3.6)
+                self.my_wind = str(round(weather_data.wind*3.6, 2))
                 self.my_rain = str(weather_data.rain)
-                widget.text = "Search"
+                label = self.ids.appStatusLabel
+                label.color = get_color_from_hex('#00FF00')
+                self.my_appStatus = str("SUCCESS: App runs flawlessly")
         else:
             print()
-            widget.text = "ERROR: Missing inputs"
-       
+            label = self.ids.appStatusLabel
+            label.color = get_color_from_hex('#FF0000')
+            self.my_appStatus = str("ERROR: Missing inputs")
 
 
 # with '@dataclass' you dont need '__init__' and '__repr__' and '__eq__' method

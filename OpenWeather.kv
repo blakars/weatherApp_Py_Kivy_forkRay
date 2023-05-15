@@ -1,67 +1,125 @@
 BoxLayoutExample:    # referenced to the calss 'BoxLayoutExample' => Main Interface
 
 <BoxLayoutExample>:
-    orientation: 'horizontal'
+    orientation: 'vertical'
+    spacing: 10
+    padding: 20
 
-    BoxLayout:
-        orientation: 'vertical'
-        spacing: 10
-        size_hint_x: 0.5
-        padding: 20
+    Label:
+        text: "Weather App"
+        font_size: self.height
+        color: 1, 0.5, 0, 1
+        font_name: 'Impact.ttf'
+        size_hint_y: 0.1
 
-        Label:
-            text: 'City'
+    BoxLayout:                  
+        orientation: 'horizontal'
 
-        TextInput:
-            id: city
-            hint_text: "Wangen"
-            text: "Wangen"
+        BoxLayout:
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Line:
+                    width: 1.5
+                    rectangle: self.x, self.y, self.width, self.height 
+            orientation: 'vertical'
+            size_hint_x: 0.5
+            padding: 20
 
-        Label:
-            text: 'State (token)'
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    text: 'City'
 
-        TextInput:
-            id: state
-            hint_text: "BW"
-            text: "BW"
+                TextInput:
+                    id: city
+                    #size_hint_y: 0.5
+                    hint_text: "Wangen"
+                    text: "Wangen"
 
-        Label:
-            text: 'Country'
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    text: 'State (token)'
 
-        TextInput:
-            id: country
-            hint_text: "Germany"
-            text: "Germany"
+                TextInput:
+                    id: state
+                    #size_hint_y: 0.5
+                    hint_text: "BW"
+                    text: "BW"
 
-    BoxLayout:
-        orientation: 'vertical'
-        spacing: 10
-        size_hint_x: 0.5
-        padding: 20
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    text: 'Country'
 
-        Button:
-            text: "Search"
-            size_hint_y: 0.5
-            on_press: root.on_button_click(self, city.text, state.text, country.text)
+                TextInput:
+                    id: country
+                    #size_hint_y: 0.5
+                    hint_text: "Germany"
+                    text: "Germany"
 
-        AsyncImage:
-            source: "https://openweathermap.org/img/wn/{}@2x.png".format(root.my_image) # "https://openweathermap.org/img/wn/10d@2x.png" # https://openweathermap.org/img/wn/{{data.icon}}@2x.png
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.5
+                size_hint_x: 0.8
+                pos_hint: {'center_x': 0.5,'center_y': 0.5}
 
-        Label:
-            text: "Main:    " + root.my_clouds
-        Label:
-            text: "Clouds:    " + root.my_description
-        Label:
-            text: "Temperature:    " + root.my_temperature + " °C"
-        Label:
-            text: "Humidity:    " + root.my_humidity + " %"
-        Label:
-            text: "Wind:    " + root.my_wind + " km/h"
-        Label:
-            text: "Rain:    " + root.my_rain + " %"
+                Button:
+                    text: "Search"
+                    on_press: root.on_button_click(self, city.text, state.text, country.text)
 
-        Button:
-            text: "Application Quit"
-            size_hint_y: 0.5
-            on_press: app.stop()
+                Button:
+                    text: "Application Quit"
+                    on_press: app.stop()
 
+        BoxLayout:
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Line:
+                    width: 1.5
+                    rectangle: self.x, self.y, self.width, self.height 
+            orientation: 'vertical'
+            size_hint_x: 0.5
+            padding: 20
+
+
+
+            AsyncImage:
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    Line:
+                        width: 1.5
+                        rectangle: self.x, self.y, self.width, self.height 
+
+                size_hint_y: 2
+                source: "https://openweathermap.org/img/wn/{}@2x.png".format(root.my_image)
+
+            Label:
+                text: "Main:    " + root.my_clouds
+            Label:
+                text: "Clouds:    " + root.my_description
+            Label:
+                text: "Temperature:    " + root.my_temperature + " °C"
+            Label:
+                text: "Humidity:    " + root.my_humidity + " %"
+            Label:
+                text: "Wind:    " + root.my_wind + " km/h"
+            Label:
+                text: "Rain:    " + root.my_rain + " %"
+
+
+
+            
+    Label:
+        id: appStatusLabel
+        text: "App Status    >>>    " + root.my_appStatus + "    <<<"
+        size_hint_y: 0.05
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Line:
+                width: 1.5
+                rectangle: self.x, self.y, self.width, self.height
